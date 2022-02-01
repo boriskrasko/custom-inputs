@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Inputs</title>
+    <style>
+       :root {
+        --input-h: 0;
+        --input-s: 0%;
+        --input-b: 50%;
+      }
+
+      body {
+        font-family: Helvetica, sans-serif;
+      }
+
+      input {
+        font-size: 16px;
+      }
+
+      input.radio[type="radio"] {
+        --size: 0.8125rem;
+        --color: hsla(var(--input-h), var(--input-s), var(--input-b), 1);
+        --unit: calc(var(--size) * 0.125);
+        --border: hsla(var(--input-h), var(--input-s), 10%, 1);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 50%;
+        width: var(--size, 1rem);
+        height: var(--size, 1rem);
+        border: var(--border-width, 0.0625rem) solid var(--color, #000);
+      }
+
+      input.radio[type="radio"]:hover {
+        --input-b: 25%;
+      }
+
+      input.radio[type="radio"]:checked {
+        --input-b: 10%;
+        box-shadow: inset 0 0 0 var(--unit, 0.125rem) #fff;
+        background-color: var(--color, #000);
+      }
+
+      input.radio[type="radio"]:checked:hover {
+        --input-b: 0%;
+        box-shadow: inset 0 0 0 var(--unit, 0.125rem) #fff;
+        background-color: var(--color, #000);
+      }
+
+      input.checkbox[type="checkbox"] {
+        --size: 0.8125rem;
+        --color: hsla(var(--input-h), var(--input-s), var(--input-b), 1);
+        --unit: calc(var(--size) * 0.125);
+        --border: hsla(0, 0%, 10%, 1);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: var(--size, 1rem);
+        height: var(--size, 1rem);
+        border: var(--border-width, 0.0625rem) solid var(--color, #000);
+      }
+
+      input.checkbox[type="checkbox"]:hover {
+        --input-b: 25%;
+      }
+
+      input.checkbox[type="checkbox"]:checked {
+        --input-b: 10%;
+        background: url(checkmark.svg) var(--color, #000) center center / 80% no-repeat;
+      }
+
+      input.checkbox[type="checkbox"]:checked:hover {
+        --input-b: 0%;
+        background-color: var(--color, #000);
+      }
+
+      input.color[type="color"] {
+        --size: 3rem;
+        --aspect-ratio: 1.92;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: var(--size, 1rem);
+        height: calc(var(--size, 1rem) / var(--aspect-ratio, 1.92));
+        padding: 0;
+        border: none;
+      }
+
+      input.color[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+
+      input.color[type="color"]::-webkit-color-swatch {
+        border: none;
+      }
+
+      input.range[type="range"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        height: 1px;
+        --color: hsla(var(--input-h), var(--input-s), var(--input-b), 1);
+        background-color: var(--color, #000);
+        outline: none;
+      }
+
+      input.range[type="range"]::-webkit-slider-thumb:hover {
+        --input-b: 10%;
+      }
+
+      input.range::-webkit-slider-thumb {
+        --size: 1rem;
+        -webkit-appearance: none;
+        appearance: none;
+        --input-b: 15%;
+        --color: hsla(var(--input-h), var(--input-s), var(--input-b), 1);
+        width: var(--size, 1rem);
+        height: var(--size, 1rem);
+        border-radius: 50%;
+        background: var(--color, #000);
+        cursor: pointer;
+      }
+
+      input.range[type="range"]::-webkit-slider-thumb:hover {
+        --input-b: 10%;
+      }
+
+      input.range[type="range"]::-webkit-slider-thumb:active {
+        --input-b: 0%;
+      }
+
+      input.range::-moz-range-thumb {
+        --size: 1rem;
+        --input-b: 15%;
+        --color: hsla(var(--input-h), var(--input-s), var(--input-b), 1);
+        -moz-appearance: none;
+        appearance: none;
+        width: var(--size, 1rem);
+        height: var(--size, 1rem);
+        border: none;
+        border-radius: 50%;
+        background: var(--color, #000);
+        cursor: pointer;
+      }
+
+      input.range[type="range"]::-moz-range-thumb:hover {
+        --input-b: 10%;
+      }
+
+      input.range[type="range"]::-moz-range-thumb:active {
+        --input-b: 0%;
+      }
+
+      .form,
+      .form>p {
+        position: relative;
+        width: max-content;
+      }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+      }
+
+      input.input[type="text"] {
+        box-sizing: border-box;
+        width: 14rem;
+        height: 3rem;
+        padding: 1rem 1.8rem 0 .5rem;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        position: relative;
+        z-index: 1;
+        background-color: transparent;
+      }
+
+      input.input[type="text"]~label {
+        position: absolute;
+        top: 1rem;
+        left: 0.5rem;
+        z-index: 0;
+        color: #777;
+        transition: 0.1s all;
+      }
+
+      input.input[type="text"]:focus {
+        background: transparent;
+      }
+
+      input.input[type="text"]:focus~label {
+        top: 0.4rem;
+        font-size: 0.7rem;
+      }
+
+      input.input[type="text"]:not(:placeholder-shown)~label {
+        top: 0.4rem;
+        font-size: 0.7rem;
+        z-index: 1;
+      }
+
+      input.input[type="text"]:focus~label>strong {
+        opacity: 0;
+      }
+
+      input.input[type="text"]:not(:placeholder-shown)~label>strong {
+        opacity: 0;
+      }
+
+      input.input[type="text"]~span::after {
+        opacity: 0;
+        position: absolute;
+        right: 0.5rem;
+        top: 1rem;
+        outline: none;
+        border: none;
+        background: none;
+        color: #999;
+        z-index: 2;
+      }
+
+      input.input[type="text"]~span:hover::after {
+        color: #f44;
+      }
+
+      input.input[type="text"]:focus~span::after {
+        opacity: 1;
+        content: '*';
+        color: #f44;
+        z-index: 1;
+        font-size: 1.5rem;
+      }
+
+      input.input[type="text"]:focus~span:hover::after {
+        opacity: 1;
+        color: #000;
+        cursor: pointer;
+      }
+
+      input.input[type="text"]~i {
+        opacity: 0;
+        position: absolute;
+        top: 1rem;
+        margin-left: 0.5rem;
+        color: #999;
+        font-size: 0.8rem;
+        transition: 0.2s opacity
+      }
+
+      input.input[type="text"]:focus~span:hover~i {
+        opacity: 1;
+      }
+
+      input.input[type="text"]:not(:placeholder-shown):focus~span::after {
+        opacity: 1;
+        content: '...';
+        color: #999;
+        z-index: 0;
+        animation: fade 2s infinite;
+      }
+
+      @keyframes fade {
+        100% {
+          opacity: 0
+        }
+        ;
+      }
+
+      input.input[type="text"]:not(:placeholder-shown):not(:focus)~span::after {
+        opacity: 1;
+        content: "✕";
+        z-index: 2;
+        cursor: pointer;
+      }
+
+      input.submit[type="submit"] {
+        position: absolute;
+        right: 0.5rem;
+        top: 1rem;
+        outline: none;
+        border: none;
+        background: none;
+        color: #777;
+        z-index: 0;
+      }
+
+      input.input[type="text"]:not(:placeholder-shown)~input.submit[type="submit"] {
+        color: #36e;
+        cursor: pointer;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; gap: 10rem; flex-wrap: wrap;">
+      <div>
+        <p>Default</p>
+        <input type="radio" name="default" checked>
+        <input type="radio" name="default">
+        <br>
+        <p>Custom</p>
+        <input class="radio" type="radio" name="radio" checked>
+        <input class="radio" type="radio" name="radio">
+        <br>
+        <p>Default</p>
+        <input type="checkbox" name="checkbox" checked>
+        <p>Custom</p>
+        <input class="checkbox" type="checkbox" name="checkbox" checked>
+        <br>
+        <p>Default</p>
+        <input type="color" name="color" autocomplete>
+        <p>Custom</p>
+        <input class="color" type="color" name="color" autocomplete>
+        <br>
+        <p>Default</p>
+        <input type="range" name="range">
+        <p>Custom</p>
+        <input class="range" type="range" name="range">
+      </div>
+      <div>
+        <p>Form</p>
+        <form class="form" autocomplete="off">
+          <input class="input" id="zipcode" type="text" name="input" placeholder=" " required>
+          <label for="zipcode" class="label">Zip Code </label>
+          <input class="submit" type="submit" name="" value="Aplly">
+        </form>
+        <br>
+        <form class="form" autocomplete="off">
+          <input class="input" id="firstname" type="text" name="input" placeholder=" ">
+          <label for="firstname" class="label">First Name 
+          <strong>*</strong>
+          </label>
+          <span onclick="this.parentNode.children[0].value = ''"></span>
+          <i>Required!</i>
+        </form>
+        <form class="form" autocomplete="off">
+          <p>
+            <input class="input" id="firstname" type="text" name="input" placeholder=" " required>
+            <label for="firstname" class="label">First Name</label>
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
